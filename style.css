@@ -15,7 +15,9 @@ body {
 }
 
 
-/* تأثيرات الشاشة */
+/* =========================
+   تأثيرات الشاشة
+========================= */
 
 .noise,
 .scanlines {
@@ -34,6 +36,7 @@ body {
 
 .scanlines {
   opacity: .045;
+
   background:
     repeating-linear-gradient(
       0deg,
@@ -45,13 +48,14 @@ body {
   mix-blend-mode: overlay;
 }
 
-
 .hidden {
   display: none !important;
 }
 
 
-/* شاشة الدخول */
+/* =========================
+   شاشة الدخول
+========================= */
 
 .lock-screen {
   min-height: 100vh;
@@ -69,7 +73,6 @@ body {
       #050608 62%
     );
 }
-
 
 .lock-card {
   width: min(520px, 100%);
@@ -89,7 +92,6 @@ body {
   position: relative;
 }
 
-
 .lock-card:before {
   content: "";
 
@@ -104,6 +106,10 @@ body {
 }
 
 
+/* =========================
+   الخطوط
+========================= */
+
 .status,
 .classified,
 .brand,
@@ -112,17 +118,16 @@ body {
 .tag,
 .tiny,
 .section-title span,
-footer {
+footer,
+.converter-status {
   font-family: "Share Tech Mono", monospace;
   letter-spacing: 1.5px;
 }
-
 
 .status {
   font-size: 12px;
   color: #8b9c92;
 }
-
 
 .dot {
   display: inline-block;
@@ -139,7 +144,6 @@ footer {
   margin-left: 7px;
 }
 
-
 .sigil {
   font-size: 62px;
 
@@ -151,7 +155,6 @@ footer {
   margin: 20px 0 4px;
 }
 
-
 .eyebrow,
 .classified {
   color: #54e88b;
@@ -161,19 +164,19 @@ footer {
   font-size: 12px;
 }
 
-
 .lock-card h1 {
   font-size: 28px;
   margin: 10px 0;
 }
-
 
 .muted {
   color: #87938d;
 }
 
 
-/* إدخال الرمز */
+/* =========================
+   إدخال الرمز
+========================= */
 
 .code-wrap {
   display: flex;
@@ -184,7 +187,6 @@ footer {
 
   max-width: 420px;
 }
-
 
 .code-wrap input {
   min-width: 0;
@@ -204,14 +206,12 @@ footer {
   outline: none;
 }
 
-
 .code-wrap input:focus {
   border-color: #54e88b;
 
   box-shadow:
     0 0 18px rgba(84, 232, 139, .1);
 }
-
 
 button,
 .btn {
@@ -232,7 +232,6 @@ button,
   transition: .2s;
 }
 
-
 button:hover,
 .btn:hover {
   border-color: #54e88b;
@@ -243,7 +242,6 @@ button:hover,
   transform: translateY(-1px);
 }
 
-
 .primary {
   background: #54e88b;
 
@@ -252,7 +250,6 @@ button:hover,
   border-color: #54e88b;
 }
 
-
 .login-msg {
   height: 20px;
 
@@ -260,7 +257,6 @@ button:hover,
 
   font-size: 13px;
 }
-
 
 .tiny {
   font-size: 10px;
@@ -271,7 +267,9 @@ button:hover,
 }
 
 
-/* الشريط العلوي */
+/* =========================
+   الشريط العلوي
+========================= */
 
 .topbar {
   position: sticky;
@@ -295,12 +293,10 @@ button:hover,
   backdrop-filter: blur(14px);
 }
 
-
 .green,
 .top-status b {
   color: #54e88b;
 }
-
 
 .top-status {
   font-size: 11px;
@@ -309,7 +305,9 @@ button:hover,
 }
 
 
-/* الواجهة */
+/* =========================
+   الواجهة الرئيسية
+========================= */
 
 .hero {
   min-height: 78vh;
@@ -330,7 +328,6 @@ button:hover,
     );
 }
 
-
 .hero h2 {
   font-size: clamp(42px, 8vw, 86px);
 
@@ -339,12 +336,10 @@ button:hover,
   margin: 15px 0;
 }
 
-
 .hero h2 span {
   text-shadow:
     0 0 30px rgba(84, 232, 139, .22);
 }
-
 
 .hero p {
   max-width: 650px;
@@ -353,7 +348,6 @@ button:hover,
 
   font-size: 18px;
 }
-
 
 .hero-actions {
   display: flex;
@@ -366,7 +360,9 @@ button:hover,
 }
 
 
-/* الطرفية */
+/* =========================
+   الطرفية
+========================= */
 
 .terminal {
   margin: 0 8% 80px;
@@ -382,7 +378,6 @@ button:hover,
   box-shadow:
     inset 0 0 30px rgba(84, 232, 139, .025);
 }
-
 
 .terminal-head {
   display: flex;
@@ -400,7 +395,6 @@ button:hover,
   margin-bottom: 14px;
 }
 
-
 .terminal-text {
   font-size: 13px;
 
@@ -410,12 +404,13 @@ button:hover,
 }
 
 
-/* الأقسام */
+/* =========================
+   الأقسام
+========================= */
 
 .section {
   padding: 30px 8% 90px;
 }
-
 
 .section-title {
   display: flex;
@@ -427,20 +422,193 @@ button:hover,
   margin-bottom: 25px;
 }
 
-
 .section-title h3 {
   font-size: 28px;
 
   margin: 0;
 }
 
-
 .section-title span {
   color: #54e88b;
 }
 
 
-/* الملفات */
+/* =========================
+   محول الشفرة
+========================= */
+
+.converter-card {
+  border: 1px solid #26382d;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0a0f0c,
+      #060807
+    );
+
+  padding: 28px;
+
+  box-shadow:
+    inset 0 0 40px rgba(84, 232, 139, .025),
+    0 0 40px rgba(0, 0, 0, .25);
+}
+
+.converter-status {
+  color: #54e88b;
+
+  font-size: 11px;
+
+  margin-bottom: 15px;
+}
+
+.status-dot {
+  display: inline-block;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #54e88b;
+
+  box-shadow: 0 0 12px #54e88b;
+
+  margin-left: 7px;
+}
+
+.converter-description {
+  color: #7f8c85;
+
+  margin-bottom: 25px;
+}
+
+
+/* أزرار الاتجاه */
+
+.mode-buttons {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 25px;
+}
+
+.mode-btn {
+  background: #080d0a;
+
+  color: #78877e;
+
+  border: 1px solid #24342a;
+}
+
+.mode-btn.active {
+  color: #54e88b;
+
+  border-color: #54e88b;
+
+  box-shadow:
+    0 0 15px rgba(84, 232, 139, .08);
+}
+
+
+/* الإدخال */
+
+.converter-card label {
+  display: block;
+
+  font-family: "Share Tech Mono", monospace;
+
+  font-size: 11px;
+
+  color: #607068;
+
+  margin: 15px 0 8px;
+}
+
+#converterInput {
+  width: 100%;
+
+  min-height: 150px;
+
+  resize: vertical;
+
+  background: #050806;
+
+  border: 1px solid #25372c;
+
+  color: #dfffea;
+
+  padding: 16px;
+
+  font-family: "Share Tech Mono", monospace;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+#converterInput:focus {
+  border-color: #54e88b;
+
+  box-shadow:
+    0 0 20px rgba(84, 232, 139, .07);
+}
+
+
+/* أزرار المحول */
+
+.converter-actions {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin: 15px 0 25px;
+}
+
+
+/* النتيجة */
+
+.converter-output {
+  min-height: 100px;
+
+  border: 1px solid #25372c;
+
+  background: #050806;
+
+  color: #54e88b;
+
+  padding: 18px;
+
+  font-family: "Share Tech Mono", monospace;
+
+  font-size: 18px;
+
+  line-height: 2;
+
+  direction: ltr;
+
+  text-align: left;
+
+  word-break: break-word;
+
+  white-space: pre-wrap;
+}
+
+.copy-btn {
+  margin-top: 12px;
+
+  width: 100%;
+}
+
+
+/* =========================
+   الملفات
+========================= */
 
 .grid {
   display: grid;
@@ -450,7 +618,6 @@ button:hover,
 
   gap: 15px;
 }
-
 
 .file-card {
   padding: 25px;
@@ -471,13 +638,11 @@ button:hover,
   transition: .25s;
 }
 
-
 .file-card:hover {
   border-color: #3e674e;
 
   transform: translateY(-3px);
 }
-
 
 .tag {
   font-size: 10px;
@@ -485,13 +650,11 @@ button:hover,
   color: #5ee996;
 }
 
-
 .file-card h4 {
   font-size: 22px;
 
   margin: 25px 0 8px;
 }
-
 
 .file-card p {
   color: #77857d;
@@ -499,13 +662,14 @@ button:hover,
   line-height: 1.8;
 }
 
-
 .file-card button {
   margin-top: 10px;
 }
 
 
-/* الإحصائيات */
+/* =========================
+   الإحصائيات
+========================= */
 
 .stats {
   display: grid;
@@ -516,7 +680,6 @@ button:hover,
   gap: 15px;
 }
 
-
 .stats div {
   border: 1px solid #1d2a22;
 
@@ -524,7 +687,6 @@ button:hover,
 
   background: #080b09;
 }
-
 
 .stats b {
   display: block;
@@ -536,20 +698,20 @@ button:hover,
   margin-bottom: 8px;
 }
 
-
 .stats span {
   font: 10px "Share Tech Mono";
 
   color: #65736b;
 }
 
-
 .intel {
   padding-top: 0;
 }
 
 
-/* الفوتر */
+/* =========================
+   الفوتر
+========================= */
 
 footer {
   text-align: center;
@@ -564,7 +726,9 @@ footer {
 }
 
 
-/* لوحة المالك */
+/* =========================
+   لوحة المالك
+========================= */
 
 .modal {
   position: fixed;
@@ -584,7 +748,6 @@ footer {
   padding: 20px;
 }
 
-
 .modal-card {
   position: relative;
 
@@ -600,7 +763,6 @@ footer {
     0 0 80px rgba(84, 232, 139, .12);
 }
 
-
 .close {
   position: absolute;
 
@@ -615,18 +777,15 @@ footer {
   padding: 4px 10px;
 }
 
-
 .owner h3 {
   font-size: 30px;
 
   margin: 15px 0;
 }
 
-
 .owner p {
   color: #8b9991;
 }
-
 
 .owner-grid {
   display: grid;
@@ -639,13 +798,11 @@ footer {
   margin: 25px 0;
 }
 
-
 .owner-grid div {
   border: 1px solid #1d2a22;
 
   padding: 15px;
 }
-
 
 .owner-grid span {
   display: block;
@@ -657,13 +814,11 @@ footer {
   margin-bottom: 6px;
 }
 
-
 .owner-grid b {
   font: 14px "Share Tech Mono";
 
   color: #63ef9b;
 }
-
 
 .warning {
   font-size: 11px;
@@ -676,7 +831,9 @@ footer {
 }
 
 
-/* الجوال */
+/* =========================
+   الجوال
+========================= */
 
 @media (max-width: 700px) {
 
@@ -684,61 +841,58 @@ footer {
     padding: 14px 5%;
   }
 
-
   .top-status {
     display: none;
   }
-
 
   .hero {
     padding: 95px 7% 70px;
   }
 
-
   .hero h2 {
     font-size: 46px;
   }
-
 
   .hero p {
     font-size: 15px;
   }
 
-
   .terminal {
     margin: 0 7% 55px;
   }
-
 
   .section {
     padding-left: 7%;
     padding-right: 7%;
   }
 
-
   .grid,
   .stats {
     grid-template-columns: 1fr;
   }
 
-
   .code-wrap {
     flex-direction: column;
   }
-
 
   .code-wrap button {
     width: 100%;
   }
 
-
   .lock-card {
     padding: 34px 20px;
   }
 
-
   .owner-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .converter-card {
+    padding: 20px;
+  }
+
+  .converter-output {
+    font-size: 16px;
   }
 
 }
