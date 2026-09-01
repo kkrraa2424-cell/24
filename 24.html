@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>24</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#f2f2f2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#222;display:flex;align-items:center;justify-content:center;padding:18px}
+.card{width:min(620px,100%);background:#fff;border-radius:20px;padding:22px;box-shadow:0 8px 30px #00000012}
+h1{text-align:center;margin:0 0 18px;font-size:28px}
+textarea{width:100%;height:150px;border:1px solid #ddd;border-radius:14px;padding:14px;font-size:18px;outline:none;resize:vertical}
+.row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button{flex:1;min-width:120px;border:0;border-radius:12px;padding:13px;font-size:16px;background:#eee;cursor:pointer}
+button.main{background:#222;color:#fff}
+.result{margin-top:15px;background:#f7f7f7;border-radius:14px;padding:15px;min-height:70px;font-size:20px;white-space:pre-wrap;word-break:break-word}
+</style>
+</head>
+<body>
+<main class="card">
+<h1>24</h1>
+<textarea id="input" placeholder="اكتب هنا..."></textarea>
+<div class="row">
+<button class="main" onclick="goEncode()">تحويل</button>
+<button onclick="goDecode()">إظهار</button>
+<button onclick="copyResult()">نسخ</button>
+<button onclick="clearAll()">مسح</button>
+</div>
+<div id="result" class="result"></div>
+</main>
+
+<script>
+const map={
+"ا":"2324","ب":"3745","ت":"1417","ث":"2633","ج":"2034","ح":"4556","خ":"1721",
+"د":"3541","ذ":"1112","ر":"2935","ز":"4256","س":"1923","ش":"2835","ص":"2631",
+"ض":"4750","ط":"1620","ظ":"2932","ع":"3841","غ":"1115","ف":"3944","ق":"2326",
+"ك":"3136","ل":"4550","م":"1517","ن":"3440","هـ":"2124","و":"4135","ي":"2731"
+};
+const reverse={};
+for(const k in map) reverse[map[k]]=k;
+
+function goEncode(){
+ const t=document.getElementById("input").value;
+ document.getElementById("result").textContent=[...t].map(c=>c===" "?" / ":map[c]||c).join(" ").replace(/\s+\/\s+/g," / ");
+}
+function goDecode(){
+ const t=document.getElementById("input").value.trim();
+ document.getElementById("result").textContent=t.split(/\s+/).map(x=>x==="/"?" ":reverse[x]||x).join("");
+}
+function copyResult(){
+ navigator.clipboard?.writeText(document.getElementById("result").textContent);
+}
+function clearAll(){
+ document.getElementById("input").value="";
+ document.getElementById("result").textContent="";
+}
+</script>
+</body>
+</html>
