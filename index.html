@@ -1,54 +1,339 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>24</title>
-<style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#f3f3f3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#222;display:flex;justify-content:center;align-items:center;padding:18px}
-.card{width:min(620px,100%);background:#fff;border-radius:20px;padding:22px;box-shadow:0 8px 30px #0001}
-h1{text-align:center;margin:0 0 18px;font-size:28px}
-textarea{width:100%;min-height:150px;border:1px solid #ddd;border-radius:14px;padding:14px;font-size:18px;outline:none;resize:vertical}
-.row{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:10px}
-button{border:0;border-radius:12px;padding:13px;font-size:16px;background:#eee;cursor:pointer}
-button.main{background:#222;color:#fff}
-.result{margin-top:15px;background:#f7f7f7;border-radius:14px;padding:15px;min-height:70px;font-size:20px;white-space:pre-wrap;word-break:break-word}
-.note{font-size:12px;color:#777;text-align:center;margin-top:12px}
-</style>
-</head>
-<body>
-<main class="card">
-<h1>24</h1>
-<textarea id="input" placeholder="اكتب هنا..."></textarea>
-<div class="row">
-<button class="main" onclick="encodeText()">تحويل</button>
-<button onclick="decodeText()">إظهار</button>
-<button onclick="copyResult()">نسخ</button>
-<button onclick="clearAll()">مسح</button>
-</div>
-<div id="result" class="result"></div>
-<div class="note">تعمل الصفحة مباشرة في المتصفح.</div>
-</main>
-<script>
-const map={
-"ا":"2324","ب":"3745","ت":"1417","ث":"2633","ج":"2034","ح":"4556","خ":"1721",
-"د":"3541","ذ":"1112","ر":"2935","ز":"4256","س":"1923","ش":"2835","ص":"2631",
-"ض":"4750","ط":"1620","ظ":"2932","ع":"3841","غ":"1115","ف":"3944","ق":"2326",
-"ك":"3136","ل":"4550","م":"1517","ن":"3440","هـ":"2124","و":"4135","ي":"2731"
-};
-const reverse=Object.fromEntries(Object.entries(map).map(([k,v])=>[v,k]));
-const input=document.getElementById("input"), result=document.getElementById("result");
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function encodeText(){
-  result.textContent=[...input.value].map(c=>c===" " ? "/" : (map[c]||c)).join(" ");
-}
-function decodeText(){
-  result.textContent=input.value.trim().split(/\s+/).map(x=>x==="/"?" ":(reverse[x]||x)).join("");
-}
-async function copyResult(){
-  try{await navigator.clipboard.writeText(result.textContent)}catch(e){}
-}
-function clearAll(){input.value="";result.textContent=""}
-</script>
+  <title>CLASSIFIED // ARCHIVE 24</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+
+  <!-- شاشة الدخول -->
+
+  <section id="lockScreen" class="lock-screen">
+
+    <div class="lock-card">
+
+      <div class="status">
+        <span class="dot"></span>
+        SECURE CONNECTION
+      </div>
+
+      <div class="sigil">◈</div>
+
+      <p class="eyebrow">
+        CLASSIFIED // ARCHIVE 24
+      </p>
+
+      <h1>
+        منطقة الوصول المقيد
+      </h1>
+
+      <p class="muted">
+        أدخل رمز الوصول للمتابعة
+      </p>
+
+      <div class="code-wrap">
+
+        <input
+          id="accessCode"
+          type="password"
+          inputmode="numeric"
+          maxlength="12"
+          placeholder="ACCESS CODE"
+          autocomplete="off"
+        >
+
+        <button id="enterBtn">
+          ACCESS
+        </button>
+
+      </div>
+
+      <p id="loginMsg" class="login-msg"></p>
+
+      <div class="tiny">
+        AUTHORIZATION REQUIRED • SYSTEM ONLINE
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- الموقع -->
+
+  <main id="site" class="hidden">
+
+    <header class="topbar">
+
+      <div class="brand">
+        <span class="green">●</span>
+        ARCHIVE_24
+      </div>
+
+      <div class="top-status">
+        SYSTEM:
+        <b>ONLINE</b>
+
+        <span id="clock"></span>
+      </div>
+
+    </header>
+
+
+    <!-- الواجهة الرئيسية -->
+
+    <section class="hero">
+
+      <div class="classified">
+        TOP SECRET // RESTRICTED ACCESS
+      </div>
+
+      <h2>
+        أهلاً بك في
+        <span>الأرشيف</span>
+      </h2>
+
+      <p>
+        مساحة رقمية بطابع سري، مصممة لتكون واجهتك الخاصة.
+      </p>
+
+      <div class="hero-actions">
+
+        <a href="#files" class="btn primary">
+          استعراض الملفات
+        </a>
+
+        <button id="ownerBtn" class="btn">
+          OWNER ACCESS
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- الطرفية -->
+
+    <section class="terminal">
+
+      <div class="terminal-head">
+
+        <span>
+          LIVE TERMINAL
+        </span>
+
+        <span>
+          ● ACTIVE
+        </span>
+
+      </div>
+
+      <div id="terminalText" class="terminal-text"></div>
+
+    </section>
+
+
+    <!-- الملفات -->
+
+    <section id="files" class="section">
+
+      <div class="section-title">
+
+        <span>01</span>
+
+        <h3>
+          الملفات المصنفة
+        </h3>
+
+      </div>
+
+
+      <div class="grid">
+
+        <article class="file-card">
+
+          <span class="tag">
+            CLASS A
+          </span>
+
+          <h4>
+            ملف 01
+          </h4>
+
+          <p>
+            معلومات مصنفة ومحفوظة داخل الأرشيف.
+          </p>
+
+          <button class="open-file">
+            OPEN FILE
+          </button>
+
+        </article>
+
+
+        <article class="file-card">
+
+          <span class="tag">
+            CLASS B
+          </span>
+
+          <h4>
+            ملف 02
+          </h4>
+
+          <p>
+            سجل خاص يمكن تخصيصه بالمحتوى الذي تريده.
+          </p>
+
+          <button class="open-file">
+            OPEN FILE
+          </button>
+
+        </article>
+
+
+        <article class="file-card">
+
+          <span class="tag">
+            CLASS C
+          </span>
+
+          <h4>
+            ملف 03
+          </h4>
+
+          <p>
+            قسم إضافي للملاحظات والصور والروابط.
+          </p>
+
+          <button class="open-file">
+            OPEN FILE
+          </button>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- حالة النظام -->
+
+    <section class="section intel">
+
+      <div class="section-title">
+
+        <span>02</span>
+
+        <h3>
+          حالة النظام
+        </h3>
+
+      </div>
+
+
+      <div class="stats">
+
+        <div>
+          <b>24</b>
+          <span>ARCHIVE ID</span>
+        </div>
+
+        <div>
+          <b>ONLINE</b>
+          <span>STATUS</span>
+        </div>
+
+        <div>
+          <b>ENCRYPTED</b>
+          <span>CHANNEL</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer>
+
+      CLASSIFIED ARCHIVE 24 • ALL SYSTEMS OPERATIONAL
+
+    </footer>
+
+  </main>
+
+
+  <!-- لوحة المالك -->
+
+  <div id="ownerPanel" class="modal hidden">
+
+    <div class="modal-card owner">
+
+      <button class="close" id="closeOwner">
+        ×
+      </button>
+
+      <div class="classified">
+        OWNER CHANNEL
+      </div>
+
+      <h3>
+        👑 OWNER ACCESS GRANTED
+      </h3>
+
+      <p>
+        مرحبًا بمالك الموقع. هذه لوحة المالك الخاصة.
+      </p>
+
+
+      <div class="owner-grid">
+
+        <div>
+          <span>SITE</span>
+          <b>ARCHIVE 24</b>
+        </div>
+
+        <div>
+          <span>ACCESS</span>
+          <b>OWNER</b>
+        </div>
+
+        <div>
+          <span>SECURITY</span>
+          <b>LOCAL UI</b>
+        </div>
+
+        <div>
+          <span>STATUS</span>
+          <b>ONLINE</b>
+        </div>
+
+      </div>
+
+
+      <p class="warning">
+        هذا نظام دخول للواجهة فقط، وليس حماية أمنية حقيقية لبيانات حساسة.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
