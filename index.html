@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050608">
 
   <title>CLASSIFIED // ARCHIVE 24</title>
 
@@ -16,55 +17,369 @@
 
 <body>
 
-  <div class="noise"></div>
-  <div class="scanlines"></div>
+<div class="noise"></div>
+<div class="scanlines"></div>
 
-  <!-- شاشة الدخول -->
+<!-- =========================
+     شاشة الدخول
+========================= -->
 
-  <section id="lockScreen" class="lock-screen">
+<section id="lockScreen" class="lock-screen">
 
-    <div class="lock-card">
+  <div class="lock-card">
 
-      <div class="status">
-        <span class="dot"></span>
-        SECURE CONNECTION
+    <div class="status">
+      <span class="dot"></span>
+      SECURE CONNECTION
+    </div>
+
+    <div class="sigil">◈</div>
+
+    <p class="eyebrow">
+      CLASSIFIED // ARCHIVE 24
+    </p>
+
+    <h1>
+      منطقة الوصول المقيد
+    </h1>
+
+    <p class="muted">
+      أدخل رمز الوصول للمتابعة
+    </p>
+
+    <div class="code-wrap">
+
+      <input
+        id="accessCode"
+        type="password"
+        inputmode="numeric"
+        maxlength="12"
+        placeholder="ACCESS CODE"
+        autocomplete="off"
+      >
+
+      <button id="enterBtn">
+        ACCESS
+      </button>
+
+    </div>
+
+    <p id="loginMsg" class="login-msg"></p>
+
+    <div class="tiny">
+      AUTHORIZATION REQUIRED • SYSTEM ONLINE
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     الموقع الرئيسي
+========================= -->
+
+<main id="site" class="hidden">
+
+  <header class="topbar">
+
+    <div class="brand">
+      <span class="green">●</span>
+      ARCHIVE_24
+    </div>
+
+    <div class="top-status">
+      SYSTEM:
+      <b>ONLINE</b>
+
+      <span id="clock"></span>
+    </div>
+
+  </header>
+
+
+  <!-- الواجهة الرئيسية -->
+
+  <section class="hero">
+
+    <div class="classified">
+      TOP SECRET // RESTRICTED ACCESS
+    </div>
+
+    <h2>
+      أهلاً بك في
+      <span>الأرشيف</span>
+    </h2>
+
+    <p>
+      مساحة رقمية بطابع سري، مصممة لتكون واجهتك الخاصة.
+    </p>
+
+    <div class="hero-actions">
+
+      <a href="#converter" class="btn primary">
+        محول الشفرة
+      </a>
+
+      <button id="ownerBtn" class="btn">
+        OWNER ACCESS
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       الطرفية
+  ========================= -->
+
+  <section class="terminal">
+
+    <div class="terminal-head">
+
+      <span>
+        LIVE TERMINAL
+      </span>
+
+      <span>
+        ● ACTIVE
+      </span>
+
+    </div>
+
+    <div id="terminalText" class="terminal-text"></div>
+
+  </section>
+
+
+  <!-- =========================
+       محول الشفرة
+  ========================= -->
+
+  <section id="converter" class="section">
+
+    <div class="section-title">
+
+      <span>01</span>
+
+      <h3>
+        محول الشفرة السرية
+      </h3>
+
+    </div>
+
+    <div class="converter-card">
+
+      <div class="converter-status">
+        <span class="status-dot"></span>
+        SECRET CODE SYSTEM // ONLINE
       </div>
 
-      <div class="sigil">◈</div>
-
-      <p class="eyebrow">
-        CLASSIFIED // ARCHIVE 24
+      <p class="converter-description">
+        حوّل الحروف إلى أرقام أو الأرقام إلى حروف باستخدام جدول الشفرة الخاص.
       </p>
 
-      <h1>
-        منطقة الوصول المقيد
-      </h1>
 
-      <p class="muted">
-        أدخل رمز الوصول للمتابعة
-      </p>
+      <!-- اختيار الاتجاه -->
 
-      <div class="code-wrap">
+      <div class="mode-buttons">
 
-        <input
-          id="accessCode"
-          type="password"
-          inputmode="numeric"
-          maxlength="12"
-          placeholder="ACCESS CODE"
-          autocomplete="off"
+        <button
+          id="lettersToNumbers"
+          class="mode-btn active"
         >
+          🔤 الحروف → أرقام
+        </button>
 
-        <button id="enterBtn">
-          ACCESS
+        <button
+          id="numbersToLetters"
+          class="mode-btn"
+        >
+          🔢 الأرقام → حروف
         </button>
 
       </div>
 
-      <p id="loginMsg" class="login-msg"></p>
 
-      <div class="tiny">
-        AUTHORIZATION REQUIRED • SYSTEM ONLINE
+      <!-- خانة الإدخال -->
+
+      <label for="converterInput">
+        INPUT
+      </label>
+
+      <textarea
+        id="converterInput"
+        placeholder="اكتب الحروف هنا..."
+        spellcheck="false"
+      ></textarea>
+
+
+      <!-- الأزرار -->
+
+      <div class="converter-actions">
+
+        <button
+          id="convertBtn"
+          class="btn primary"
+        >
+          CONVERT
+        </button>
+
+        <button
+          id="clearBtn"
+          class="btn"
+        >
+          CLEAR
+        </button>
+
+      </div>
+
+
+      <!-- النتيجة -->
+
+      <label for="converterOutput">
+        OUTPUT
+      </label>
+
+      <div
+        id="converterOutput"
+        class="converter-output"
+      >
+        بانتظار الإدخال...
+      </div>
+
+
+      <button
+        id="copyBtn"
+        class="copy-btn"
+      >
+        📋 نسخ النتيجة
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       الملفات
+  ========================= -->
+
+  <section id="files" class="section">
+
+    <div class="section-title">
+
+      <span>02</span>
+
+      <h3>
+        الملفات المصنفة
+      </h3>
+
+    </div>
+
+
+    <div class="grid">
+
+      <article class="file-card">
+
+        <span class="tag">
+          CLASS A
+        </span>
+
+        <h4>
+          ملف 01
+        </h4>
+
+        <p>
+          معلومات مصنفة ومحفوظة داخل الأرشيف.
+        </p>
+
+        <button class="open-file">
+          OPEN FILE
+        </button>
+
+      </article>
+
+
+      <article class="file-card">
+
+        <span class="tag">
+          CLASS B
+        </span>
+
+        <h4>
+          ملف 02
+        </h4>
+
+        <p>
+          سجل خاص يمكن تخصيصه بالمحتوى الذي تريده.
+        </p>
+
+        <button class="open-file">
+          OPEN FILE
+        </button>
+
+      </article>
+
+
+      <article class="file-card">
+
+        <span class="tag">
+          CLASS C
+        </span>
+
+        <h4>
+          ملف 03
+        </h4>
+
+        <p>
+          قسم إضافي للملاحظات والصور والروابط.
+        </p>
+
+        <button class="open-file">
+          OPEN FILE
+        </button>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       حالة النظام
+  ========================= -->
+
+  <section class="section intel">
+
+    <div class="section-title">
+
+      <span>03</span>
+
+      <h3>
+        حالة النظام
+      </h3>
+
+    </div>
+
+
+    <div class="stats">
+
+      <div>
+        <b>24</b>
+        <span>ARCHIVE ID</span>
+      </div>
+
+      <div>
+        <b>ONLINE</b>
+        <span>STATUS</span>
+      </div>
+
+      <div>
+        <b>ACTIVE</b>
+        <span>CODE SYSTEM</span>
       </div>
 
     </div>
@@ -72,268 +387,74 @@
   </section>
 
 
-  <!-- الموقع -->
+  <footer>
+    CLASSIFIED ARCHIVE 24 • ALL SYSTEMS OPERATIONAL
+  </footer>
 
-  <main id="site" class="hidden">
+</main>
 
-    <header class="topbar">
 
-      <div class="brand">
-        <span class="green">●</span>
-        ARCHIVE_24
+<!-- =========================
+     لوحة المالك
+========================= -->
+
+<div id="ownerPanel" class="modal hidden">
+
+  <div class="modal-card owner">
+
+    <button
+      class="close"
+      id="closeOwner"
+    >
+      ×
+    </button>
+
+    <div class="classified">
+      OWNER CHANNEL
+    </div>
+
+    <h3>
+      👑 OWNER ACCESS GRANTED
+    </h3>
+
+    <p>
+      مرحبًا بمالك الموقع. هذه لوحة المالك الخاصة.
+    </p>
+
+    <div class="owner-grid">
+
+      <div>
+        <span>SITE</span>
+        <b>ARCHIVE 24</b>
       </div>
 
-      <div class="top-status">
-        SYSTEM:
+      <div>
+        <span>ACCESS</span>
+        <b>OWNER</b>
+      </div>
+
+      <div>
+        <span>CODE</span>
+        <b>ACTIVE</b>
+      </div>
+
+      <div>
+        <span>STATUS</span>
         <b>ONLINE</b>
-
-        <span id="clock"></span>
       </div>
-
-    </header>
-
-
-    <!-- الواجهة الرئيسية -->
-
-    <section class="hero">
-
-      <div class="classified">
-        TOP SECRET // RESTRICTED ACCESS
-      </div>
-
-      <h2>
-        أهلاً بك في
-        <span>الأرشيف</span>
-      </h2>
-
-      <p>
-        مساحة رقمية بطابع سري، مصممة لتكون واجهتك الخاصة.
-      </p>
-
-      <div class="hero-actions">
-
-        <a href="#files" class="btn primary">
-          استعراض الملفات
-        </a>
-
-        <button id="ownerBtn" class="btn">
-          OWNER ACCESS
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- الطرفية -->
-
-    <section class="terminal">
-
-      <div class="terminal-head">
-
-        <span>
-          LIVE TERMINAL
-        </span>
-
-        <span>
-          ● ACTIVE
-        </span>
-
-      </div>
-
-      <div id="terminalText" class="terminal-text"></div>
-
-    </section>
-
-
-    <!-- الملفات -->
-
-    <section id="files" class="section">
-
-      <div class="section-title">
-
-        <span>01</span>
-
-        <h3>
-          الملفات المصنفة
-        </h3>
-
-      </div>
-
-
-      <div class="grid">
-
-        <article class="file-card">
-
-          <span class="tag">
-            CLASS A
-          </span>
-
-          <h4>
-            ملف 01
-          </h4>
-
-          <p>
-            معلومات مصنفة ومحفوظة داخل الأرشيف.
-          </p>
-
-          <button class="open-file">
-            OPEN FILE
-          </button>
-
-        </article>
-
-
-        <article class="file-card">
-
-          <span class="tag">
-            CLASS B
-          </span>
-
-          <h4>
-            ملف 02
-          </h4>
-
-          <p>
-            سجل خاص يمكن تخصيصه بالمحتوى الذي تريده.
-          </p>
-
-          <button class="open-file">
-            OPEN FILE
-          </button>
-
-        </article>
-
-
-        <article class="file-card">
-
-          <span class="tag">
-            CLASS C
-          </span>
-
-          <h4>
-            ملف 03
-          </h4>
-
-          <p>
-            قسم إضافي للملاحظات والصور والروابط.
-          </p>
-
-          <button class="open-file">
-            OPEN FILE
-          </button>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- حالة النظام -->
-
-    <section class="section intel">
-
-      <div class="section-title">
-
-        <span>02</span>
-
-        <h3>
-          حالة النظام
-        </h3>
-
-      </div>
-
-
-      <div class="stats">
-
-        <div>
-          <b>24</b>
-          <span>ARCHIVE ID</span>
-        </div>
-
-        <div>
-          <b>ONLINE</b>
-          <span>STATUS</span>
-        </div>
-
-        <div>
-          <b>ENCRYPTED</b>
-          <span>CHANNEL</span>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <footer>
-
-      CLASSIFIED ARCHIVE 24 • ALL SYSTEMS OPERATIONAL
-
-    </footer>
-
-  </main>
-
-
-  <!-- لوحة المالك -->
-
-  <div id="ownerPanel" class="modal hidden">
-
-    <div class="modal-card owner">
-
-      <button class="close" id="closeOwner">
-        ×
-      </button>
-
-      <div class="classified">
-        OWNER CHANNEL
-      </div>
-
-      <h3>
-        👑 OWNER ACCESS GRANTED
-      </h3>
-
-      <p>
-        مرحبًا بمالك الموقع. هذه لوحة المالك الخاصة.
-      </p>
-
-
-      <div class="owner-grid">
-
-        <div>
-          <span>SITE</span>
-          <b>ARCHIVE 24</b>
-        </div>
-
-        <div>
-          <span>ACCESS</span>
-          <b>OWNER</b>
-        </div>
-
-        <div>
-          <span>SECURITY</span>
-          <b>LOCAL UI</b>
-        </div>
-
-        <div>
-          <span>STATUS</span>
-          <b>ONLINE</b>
-        </div>
-
-      </div>
-
-
-      <p class="warning">
-        هذا نظام دخول للواجهة فقط، وليس حماية أمنية حقيقية لبيانات حساسة.
-      </p>
 
     </div>
 
+    <p class="warning">
+      هذه حماية للواجهة فقط وليست نظام مصادقة حقيقيًا.
+    </p>
+
   </div>
 
+</div>
 
-  <script src="script.js"></script>
+
+<script src="script.js"></script>
 
 </body>
 </html>
