@@ -1,898 +1,624 @@
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: #050608;
-  color: #e7ece9;
-  font-family: Cairo, system-ui, sans-serif;
-  overflow-x: hidden;
-}
-
-
-/* =========================
-   تأثيرات الشاشة
-========================= */
-
-.noise,
-.scanlines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-}
-
-.noise {
-  opacity: .035;
-
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.scanlines {
-  opacity: .045;
-
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 3px,
-      #fff 4px
-    );
-
-  mix-blend-mode: overlay;
-}
-
-.hidden {
-  display: none !important;
-}
-
-
-/* =========================
-   شاشة الدخول
-========================= */
-
-.lock-screen {
-  min-height: 100vh;
-
-  display: grid;
-  place-items: center;
-
-  padding: 24px;
-
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      #102016 0,
-      #080b09 28%,
-      #050608 62%
-    );
-}
-
-.lock-card {
-  width: min(520px, 100%);
-
-  padding: 42px 28px;
-
-  border: 1px solid #27362d;
-
-  background: rgba(7, 10, 8, .88);
-
-  box-shadow:
-    0 0 80px rgba(40, 255, 130, .07),
-    inset 0 0 30px rgba(40, 255, 130, .025);
-
-  text-align: center;
-
-  position: relative;
-}
-
-.lock-card:before {
-  content: "";
-
-  position: absolute;
-  inset: -1px;
-
-  border: 1px solid rgba(83, 255, 146, .12);
-
-  transform: translate(5px, 5px);
-
-  pointer-events: none;
-}
-
-
-/* =========================
-   الخطوط
-========================= */
-
-.status,
-.classified,
-.brand,
-.top-status,
-.terminal,
-.tag,
-.tiny,
-.section-title span,
-footer,
-.converter-status {
-  font-family: "Share Tech Mono", monospace;
-  letter-spacing: 1.5px;
-}
-
-.status {
-  font-size: 12px;
-  color: #8b9c92;
-}
-
-.dot {
-  display: inline-block;
-
-  width: 7px;
-  height: 7px;
-
-  background: #51ff91;
-
-  border-radius: 50%;
-
-  box-shadow: 0 0 12px #51ff91;
-
-  margin-left: 7px;
-}
-
-.sigil {
-  font-size: 62px;
-
-  color: #59ff98;
-
-  text-shadow:
-    0 0 25px rgba(89, 255, 152, .45);
-
-  margin: 20px 0 4px;
-}
-
-.eyebrow,
-.classified {
-  color: #54e88b;
-
-  font-family: "Share Tech Mono", monospace;
-
-  font-size: 12px;
-}
-
-.lock-card h1 {
-  font-size: 28px;
-  margin: 10px 0;
-}
-
-.muted {
-  color: #87938d;
-}
-
-
-/* =========================
-   إدخال الرمز
-========================= */
-
-.code-wrap {
-  display: flex;
-
-  gap: 9px;
-
-  margin: 25px auto 10px;
-
-  max-width: 420px;
-}
-
-.code-wrap input {
-  min-width: 0;
-
-  flex: 1;
-
-  background: #080c0a;
-
-  border: 1px solid #304239;
-
-  color: #dfffea;
-
-  padding: 15px 14px;
-
-  font-family: "Share Tech Mono", monospace;
-
-  outline: none;
-}
-
-.code-wrap input:focus {
-  border-color: #54e88b;
-
-  box-shadow:
-    0 0 18px rgba(84, 232, 139, .1);
-}
-
-button,
-.btn {
-  border: 1px solid #395143;
-
-  background: #0b110e;
-
-  color: #dfffea;
-
-  padding: 13px 18px;
-
-  font: 600 13px Cairo;
-
-  cursor: pointer;
-
-  text-decoration: none;
-
-  transition: .2s;
-}
-
-button:hover,
-.btn:hover {
-  border-color: #54e88b;
-
-  box-shadow:
-    0 0 18px rgba(84, 232, 139, .1);
-
-  transform: translateY(-1px);
-}
-
-.primary {
-  background: #54e88b;
-
-  color: #031108;
-
-  border-color: #54e88b;
-}
-
-.login-msg {
-  height: 20px;
-
-  color: #ff7272;
-
-  font-size: 13px;
-}
-
-.tiny {
-  font-size: 10px;
-
-  color: #59655e;
-
-  margin-top: 25px;
-}
-
-
-/* =========================
-   الشريط العلوي
-========================= */
-
-.topbar {
-  position: sticky;
-
-  top: 0;
-
-  z-index: 20;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  padding: 16px 6%;
-
-  border-bottom: 1px solid #1b251f;
-
-  background: rgba(5, 6, 8, .84);
-
-  backdrop-filter: blur(14px);
-}
-
-.green,
-.top-status b {
-  color: #54e88b;
-}
-
-.top-status {
-  font-size: 11px;
-
-  color: #66746c;
-}
-
-
-/* =========================
-   الواجهة الرئيسية
-========================= */
-
-.hero {
-  min-height: 78vh;
-
-  padding: 120px 8% 90px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  background:
-    radial-gradient(
-      circle at 70% 50%,
-      rgba(40, 150, 80, .08),
-      transparent 38%
-    );
-}
+/* =================================
+   ARCHIVE 24
+   SECRET CODE SYSTEM
+================================= */
 
-.hero h2 {
-  font-size: clamp(42px, 8vw, 86px);
 
-  line-height: 1.05;
+/* ================================
+   رموز الدخول
+================================ */
 
-  margin: 15px 0;
-}
-
-.hero h2 span {
-  text-shadow:
-    0 0 30px rgba(84, 232, 139, .22);
-}
-
-.hero p {
-  max-width: 650px;
-
-  color: #91a098;
-
-  font-size: 18px;
-}
-
-.hero-actions {
-  display: flex;
-
-  gap: 12px;
-
-  flex-wrap: wrap;
-
-  margin-top: 25px;
-}
-
-
-/* =========================
-   الطرفية
-========================= */
-
-.terminal {
-  margin: 0 8% 80px;
-
-  border: 1px solid #25352b;
-
-  background: #070a08;
-
-  padding: 20px;
-
-  color: #70e99a;
-
-  box-shadow:
-    inset 0 0 30px rgba(84, 232, 139, .025);
-}
-
-.terminal-head {
-  display: flex;
-
-  justify-content: space-between;
-
-  color: #65736b;
-
-  font-size: 11px;
-
-  border-bottom: 1px solid #1c2921;
-
-  padding-bottom: 12px;
-
-  margin-bottom: 14px;
-}
-
-.terminal-text {
-  font-size: 13px;
-
-  line-height: 2;
-
-  min-height: 95px;
-}
-
-
-/* =========================
-   الأقسام
-========================= */
-
-.section {
-  padding: 30px 8% 90px;
-}
-
-.section-title {
-  display: flex;
-
-  align-items: center;
-
-  gap: 15px;
-
-  margin-bottom: 25px;
-}
-
-.section-title h3 {
-  font-size: 28px;
-
-  margin: 0;
-}
-
-.section-title span {
-  color: #54e88b;
-}
-
-
-/* =========================
-   محول الشفرة
-========================= */
-
-.converter-card {
-  border: 1px solid #26382d;
-
-  background:
-    linear-gradient(
-      145deg,
-      #0a0f0c,
-      #060807
-    );
-
-  padding: 28px;
-
-  box-shadow:
-    inset 0 0 40px rgba(84, 232, 139, .025),
-    0 0 40px rgba(0, 0, 0, .25);
-}
-
-.converter-status {
-  color: #54e88b;
-
-  font-size: 11px;
-
-  margin-bottom: 15px;
-}
-
-.status-dot {
-  display: inline-block;
-
-  width: 7px;
-  height: 7px;
-
-  border-radius: 50%;
-
-  background: #54e88b;
-
-  box-shadow: 0 0 12px #54e88b;
-
-  margin-left: 7px;
-}
-
-.converter-description {
-  color: #7f8c85;
-
-  margin-bottom: 25px;
-}
-
-
-/* أزرار الاتجاه */
-
-.mode-buttons {
-  display: flex;
-
-  gap: 10px;
-
-  flex-wrap: wrap;
-
-  margin-bottom: 25px;
-}
-
-.mode-btn {
-  background: #080d0a;
-
-  color: #78877e;
-
-  border: 1px solid #24342a;
-}
-
-.mode-btn.active {
-  color: #54e88b;
-
-  border-color: #54e88b;
-
-  box-shadow:
-    0 0 15px rgba(84, 232, 139, .08);
-}
-
-
-/* الإدخال */
-
-.converter-card label {
-  display: block;
-
-  font-family: "Share Tech Mono", monospace;
-
-  font-size: 11px;
-
-  color: #607068;
-
-  margin: 15px 0 8px;
-}
-
-#converterInput {
-  width: 100%;
-
-  min-height: 150px;
-
-  resize: vertical;
-
-  background: #050806;
-
-  border: 1px solid #25372c;
-
-  color: #dfffea;
-
-  padding: 16px;
-
-  font-family: "Share Tech Mono", monospace;
-
-  font-size: 16px;
+const CONFIG = {
 
-  outline: none;
-}
-
-#converterInput:focus {
-  border-color: #54e88b;
-
-  box-shadow:
-    0 0 20px rgba(84, 232, 139, .07);
-}
-
-
-/* أزرار المحول */
-
-.converter-actions {
-  display: flex;
-
-  gap: 10px;
-
-  flex-wrap: wrap;
-
-  margin: 15px 0 25px;
-}
-
-
-/* النتيجة */
-
-.converter-output {
-  min-height: 100px;
-
-  border: 1px solid #25372c;
-
-  background: #050806;
-
-  color: #54e88b;
+  accessCode: "246824",
 
-  padding: 18px;
+  ownerCode: "240924"
 
-  font-family: "Share Tech Mono", monospace;
+};
 
-  font-size: 18px;
 
-  line-height: 2;
+/* ================================
+   جدول الشفرة الخاص بك
+================================ */
 
-  direction: ltr;
+const codeTable = {
 
-  text-align: left;
+  "ا": "2324",
+  "ب": "3745",
+  "ت": "1417",
+  "ث": "2633",
+  "ج": "2034",
+  "ح": "4556",
+  "خ": "1721",
+  "د": "3541",
+  "ذ": "1112",
+  "ر": "2935",
+  "ز": "4256",
+  "س": "1923",
+  "ش": "2835",
+  "ص": "2631",
+  "ض": "4750",
+  "ط": "1620",
+  "ظ": "2932",
+  "ع": "3841",
+  "غ": "1115",
+  "ف": "3944",
+  "ق": "2326",
+  "ك": "3136",
+  "ل": "4550",
+  "م": "1517",
+  "ن": "3440",
+  "هـ": "2124",
+  "و": "4135",
+  "ي": "2731"
 
-  word-break: break-word;
+};
 
-  white-space: pre-wrap;
-}
-
-.copy-btn {
-  margin-top: 12px;
-
-  width: 100%;
-}
 
+/* ================================
+   إنشاء جدول عكسي
+   رقم → حرف
+================================ */
 
-/* =========================
-   الملفات
-========================= */
+const reverseTable = {};
 
-.grid {
-  display: grid;
+for (const letter in codeTable) {
 
-  grid-template-columns:
-    repeat(3, 1fr);
+  reverseTable[codeTable[letter]] = letter;
 
-  gap: 15px;
 }
 
-.file-card {
-  padding: 25px;
 
-  border: 1px solid #1d2a22;
+/* ================================
+   عناصر تسجيل الدخول
+================================ */
 
-  background:
-    linear-gradient(
-      145deg,
-      #0a0e0c,
-      #060807
-    );
+const lockScreen =
+  document.getElementById("lockScreen");
 
-  min-height: 220px;
+const site =
+  document.getElementById("site");
 
-  position: relative;
+const input =
+  document.getElementById("accessCode");
 
-  transition: .25s;
-}
-
-.file-card:hover {
-  border-color: #3e674e;
-
-  transform: translateY(-3px);
-}
+const loginMsg =
+  document.getElementById("loginMsg");
 
-.tag {
-  font-size: 10px;
 
-  color: #5ee996;
-}
+/* ================================
+   تسجيل الدخول
+================================ */
 
-.file-card h4 {
-  font-size: 22px;
+function enter() {
 
-  margin: 25px 0 8px;
-}
+  const value =
+    input.value.trim();
 
-.file-card p {
-  color: #77857d;
 
-  line-height: 1.8;
-}
+  if (
+    value === CONFIG.accessCode ||
+    value === CONFIG.ownerCode
+  ) {
 
-.file-card button {
-  margin-top: 10px;
-}
+    lockScreen.classList.add("hidden");
 
+    site.classList.remove("hidden");
 
-/* =========================
-   الإحصائيات
-========================= */
 
-.stats {
-  display: grid;
+    if (
+      value === CONFIG.ownerCode
+    ) {
 
-  grid-template-columns:
-    repeat(3, 1fr);
+      openOwner();
 
-  gap: 15px;
-}
+    }
 
-.stats div {
-  border: 1px solid #1d2a22;
 
-  padding: 25px;
+    startTerminal();
 
-  background: #080b09;
-}
+  }
 
-.stats b {
-  display: block;
+  else {
 
-  font: 20px "Share Tech Mono";
+    loginMsg.textContent =
+      "ACCESS DENIED // رمز غير صحيح";
 
-  color: #dfffea;
+    input.value = "";
 
-  margin-bottom: 8px;
-}
+    input.focus();
 
-.stats span {
-  font: 10px "Share Tech Mono";
+  }
 
-  color: #65736b;
 }
 
-.intel {
-  padding-top: 0;
-}
 
+document
+  .getElementById("enterBtn")
+  .onclick = enter;
 
-/* =========================
-   الفوتر
-========================= */
 
-footer {
-  text-align: center;
+input.addEventListener(
+  "keydown",
+  function(event) {
 
-  border-top: 1px solid #1b251f;
+    if (event.key === "Enter") {
 
-  padding: 30px;
+      enter();
 
-  color: #4d5952;
+    }
 
-  font-size: 10px;
-}
+  }
+);
 
 
-/* =========================
+/* ================================
    لوحة المالك
-========================= */
+================================ */
 
-.modal {
-  position: fixed;
+function openOwner() {
 
-  inset: 0;
+  document
+    .getElementById("ownerPanel")
+    .classList
+    .remove("hidden");
 
-  z-index: 100;
-
-  display: grid;
-
-  place-items: center;
-
-  background: rgba(0, 0, 0, .8);
-
-  backdrop-filter: blur(10px);
-
-  padding: 20px;
 }
 
-.modal-card {
-  position: relative;
 
-  width: min(620px, 100%);
+document
+  .getElementById("ownerBtn")
+  .onclick = openOwner;
 
-  padding: 35px;
 
-  border: 1px solid #3b5d47;
+document
+  .getElementById("closeOwner")
+  .onclick = function() {
 
-  background: #070a08;
+    document
+      .getElementById("ownerPanel")
+      .classList
+      .add("hidden");
 
-  box-shadow:
-    0 0 80px rgba(84, 232, 139, .12);
-}
+  };
 
-.close {
-  position: absolute;
 
-  top: 12px;
+/* ================================
+   الطرفية
+================================ */
 
-  left: 12px;
+function startTerminal() {
 
-  border: 0;
+  const lines = [
 
-  font-size: 25px;
+    "[OK] SECURE CHANNEL ESTABLISHED",
 
-  padding: 4px 10px;
-}
+    "[OK] ARCHIVE 24 INITIALIZED",
 
-.owner h3 {
-  font-size: 30px;
+    "[OK] SECRET CODE SYSTEM ONLINE",
 
-  margin: 15px 0;
-}
+    "[INFO] WAITING FOR AUTHORIZED OPERATOR"
 
-.owner p {
-  color: #8b9991;
-}
+  ];
 
-.owner-grid {
-  display: grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  let index = 0;
 
-  gap: 10px;
 
-  margin: 25px 0;
-}
+  const box =
+    document.getElementById("terminalText");
 
-.owner-grid div {
-  border: 1px solid #1d2a22;
 
-  padding: 15px;
-}
+  function showLine() {
 
-.owner-grid span {
-  display: block;
+    if (
+      index < lines.length
+    ) {
 
-  color: #5f6c65;
+      box.innerHTML +=
+        "<div>> " +
+        lines[index] +
+        "</div>";
 
-  font: 10px "Share Tech Mono";
+      index++;
 
-  margin-bottom: 6px;
-}
+      setTimeout(
+        showLine,
+        450
+      );
 
-.owner-grid b {
-  font: 14px "Share Tech Mono";
+    }
 
-  color: #63ef9b;
-}
+  }
 
-.warning {
-  font-size: 11px;
 
-  border-right: 2px solid #e2b84d;
+  showLine();
 
-  padding-right: 10px;
-
-  color: #a99b76 !important;
 }
 
 
-/* =========================
-   الجوال
-========================= */
+/* ================================
+   محول الشفرة
+================================ */
 
-@media (max-width: 700px) {
+const converterInput =
+  document.getElementById(
+    "converterInput"
+  );
 
-  .topbar {
-    padding: 14px 5%;
+const converterOutput =
+  document.getElementById(
+    "converterOutput"
+  );
+
+const lettersToNumbers =
+  document.getElementById(
+    "lettersToNumbers"
+  );
+
+const numbersToLetters =
+  document.getElementById(
+    "numbersToLetters"
+  );
+
+
+let currentMode =
+  "lettersToNumbers";
+
+
+/* ================================
+   تغيير الاتجاه
+================================ */
+
+lettersToNumbers.onclick =
+  function() {
+
+    currentMode =
+      "lettersToNumbers";
+
+    lettersToNumbers
+      .classList
+      .add("active");
+
+    numbersToLetters
+      .classList
+      .remove("active");
+
+    converterInput.placeholder =
+      "اكتب الحروف هنا...";
+
+  };
+
+
+numbersToLetters.onclick =
+  function() {
+
+    currentMode =
+      "numbersToLetters";
+
+    numbersToLetters
+      .classList
+      .add("active");
+
+    lettersToNumbers
+      .classList
+      .remove("active");
+
+    converterInput.placeholder =
+      "مثال: 2324 3745 1417";
+
+  };
+
+
+/* ================================
+   تحويل الحروف → أرقام
+================================ */
+
+function lettersToCode(text) {
+
+  let result = [];
+
+  let i = 0;
+
+
+  while (i < text.length) {
+
+    /* هـ */
+
+    if (
+      text.substring(i, i + 2) === "هـ"
+    ) {
+
+      result.push(codeTable["هـ"]);
+
+      i += 2;
+
+      continue;
+
+    }
+
+
+    const letter =
+      text[i];
+
+
+    /* مسافة */
+
+    if (
+      letter === " "
+    ) {
+
+      result.push("/");
+
+      i++;
+
+      continue;
+
+    }
+
+
+    /* حرف موجود */
+
+    if (
+      codeTable[letter]
+    ) {
+
+      result.push(
+        codeTable[letter]
+      );
+
+    }
+
+    else {
+
+      result.push(letter);
+
+    }
+
+
+    i++;
+
   }
 
-  .top-status {
-    display: none;
-  }
 
-  .hero {
-    padding: 95px 7% 70px;
-  }
-
-  .hero h2 {
-    font-size: 46px;
-  }
-
-  .hero p {
-    font-size: 15px;
-  }
-
-  .terminal {
-    margin: 0 7% 55px;
-  }
-
-  .section {
-    padding-left: 7%;
-    padding-right: 7%;
-  }
-
-  .grid,
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .code-wrap {
-    flex-direction: column;
-  }
-
-  .code-wrap button {
-    width: 100%;
-  }
-
-  .lock-card {
-    padding: 34px 20px;
-  }
-
-  .owner-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .converter-card {
-    padding: 20px;
-  }
-
-  .converter-output {
-    font-size: 16px;
-  }
+  return result.join(" ");
 
 }
+
+
+/* ================================
+   تحويل أرقام → حروف
+================================ */
+
+function codeToLetters(text) {
+
+  const clean =
+    text.trim();
+
+
+  if (!clean) {
+
+    return "";
+
+  }
+
+
+  /*
+    المسافة بين الأكواد مهمة.
+
+    مثال:
+
+    2324 3745 1417
+
+    تصبح:
+
+    ا ب ت
+  */
+
+  const parts =
+    clean.split(/\s+/);
+
+
+  let result = "";
+
+
+  for (
+    const part of parts
+  ) {
+
+    if (
+      part === "/"
+    ) {
+
+      result += " ";
+
+      continue;
+
+    }
+
+
+    if (
+      reverseTable[part]
+    ) {
+
+      result +=
+        reverseTable[part];
+
+    }
+
+    else {
+
+      result +=
+        "❓";
+
+    }
+
+  }
+
+
+  return result;
+
+}
+
+
+/* ================================
+   زر التحويل
+================================ */
+
+document
+  .getElementById("convertBtn")
+  .onclick = function() {
+
+    const text =
+      converterInput.value;
+
+
+    if (!text.trim()) {
+
+      converterOutput.textContent =
+        "بانتظار الإدخال...";
+
+      return;
+
+    }
+
+
+    if (
+      currentMode ===
+      "lettersToNumbers"
+    ) {
+
+      converterOutput.textContent =
+        lettersToCode(text);
+
+    }
+
+    else {
+
+      converterOutput.textContent =
+        codeToLetters(text);
+
+    }
+
+  };
+
+
+/* ================================
+   زر المسح
+================================ */
+
+document
+  .getElementById("clearBtn")
+  .onclick = function() {
+
+    converterInput.value = "";
+
+    converterOutput.textContent =
+      "بانتظار الإدخال...";
+
+  };
+
+
+/* ================================
+   زر النسخ
+================================ */
+
+document
+  .getElementById("copyBtn")
+  .onclick = async function() {
+
+    const text =
+      converterOutput.textContent;
+
+
+    if (
+      !text ||
+      text === "بانتظار الإدخال..."
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      await navigator.clipboard.writeText(
+        text
+      );
+
+      this.textContent =
+        "✓ تم النسخ";
+
+      setTimeout(
+        () => {
+
+          this.textContent =
+            "📋 نسخ النتيجة";
+
+        },
+        1500
+      );
+
+    }
+
+    catch {
+
+      alert(
+        "انسخ النتيجة يدويًا"
+      );
+
+    }
+
+  };
+
+
+/* ================================
+   فتح الملفات
+================================ */
+
+document
+  .querySelectorAll(".open-file")
+  .forEach(
+    function(button) {
+
+      button.onclick =
+        function() {
+
+          alert(
+            "FILE OPENED // يمكنك تخصيص هذا القسم لاحقًا."
+          );
+
+        };
+
+    }
+  );
+
+
+/* ================================
+   الساعة
+================================ */
+
+function updateClock() {
+
+  const date =
+    new Date();
+
+
+  document
+    .getElementById("clock")
+    .textContent =
+      " // " +
+      date.toLocaleTimeString(
+        "en-GB"
+      );
+
+}
+
+
+setInterval(
+  updateClock,
+  1000
+);
+
+updateClock();
